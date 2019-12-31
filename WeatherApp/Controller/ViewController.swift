@@ -8,11 +8,17 @@
 
 import UIKit
 
+
 class ViewController: UIViewController {
+    
+    var weatherMgr = WeatherManager()
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
-       
+        
+        weatherMgr.fetchWeather(cityName: "Sydney")
+        
     }
 
 
