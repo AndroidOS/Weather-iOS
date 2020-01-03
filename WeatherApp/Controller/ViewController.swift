@@ -9,16 +9,22 @@
 import UIKit
 
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, WeatherManagerDelegate {
+    
+    
     
     var weatherMgr = WeatherManager()
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        weatherMgr.delegate = self
         weatherMgr.fetchWeather(cityName: "Sydney")
         
+    }
+    
+    func didUpdateWeather(weatherData: WeatherData) {
+        print(weatherData.name)
     }
 
 
