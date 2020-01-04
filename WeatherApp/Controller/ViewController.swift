@@ -11,7 +11,11 @@ import UIKit
 
 class ViewController: UIViewController, WeatherManagerDelegate {
     
+    @IBOutlet weak var tempLabel: UILabel!
     
+    @IBOutlet weak var conditionsLabel: UILabel!
+    
+    @IBOutlet weak var imageView: UIImageView!
     
     var weatherMgr = WeatherManager()
     
@@ -24,6 +28,25 @@ class ViewController: UIViewController, WeatherManagerDelegate {
     }
     
     func didUpdateWeather(weatherData: WeatherData) {
+        
+        DispatchQueue.main.async {
+            if let conditions = weatherData.weather[0].description{
+                self.conditionsLabel.text = conditions
+                print(conditions)
+            } else {
+                self.conditionsLabel.text = "Not Available"
+            }
+            
+            if let temp = weatherData.main?.temp_max {
+                self.tempLabel.text = "\(temp)"
+                print(temp)
+            } else {
+                self.tempLabel.text = "Not Available"
+            }
+            
+            
+            
+        }
         print(weatherData.name)
     }
 
