@@ -9,7 +9,9 @@
 import UIKit
 
 
-class ViewController: UIViewController, WeatherManagerDelegate {
+class ViewController: UIViewController, WeatherManagerDelegate, UITextFieldDelegate {
+    
+    @IBOutlet weak var txtCity: UITextField!
     
     @IBOutlet weak var tempLabel: UILabel!
     
@@ -22,6 +24,7 @@ class ViewController: UIViewController, WeatherManagerDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        txtCity.delegate = self
         weatherMgr.delegate = self
         weatherMgr.fetchWeather(cityName: "Sydney")
         
@@ -50,6 +53,22 @@ class ViewController: UIViewController, WeatherManagerDelegate {
         print(weatherData.name)
     }
 
-
+    @IBAction func txt_city(_ sender: Any) {
+        
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        txtCity.endEditing(true)
+         if let city = txtCity.text {
+             weatherMgr.fetchWeather(cityName: city)
+         }
+        txtCity.text = ""
+        return true
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        
+    }
+    
 }
 
